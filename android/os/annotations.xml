@@ -1,0 +1,5 @@
+<root>
+    <item name='android.os.PowerManager.ServiceType'>
+        <annotation name='java.lang.Deprecated' />
+    </item>
+</root>
