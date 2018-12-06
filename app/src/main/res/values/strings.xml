@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">SosApp</string>
+    <string name="tvUsuario">Usuario</string>
+    <string name="tvContraseña">Contraseña</string>
+    <string name="tvRegistrarse">Registrarse</string>
+    <string name="tvEmail">Email</string>
+    <string name="edusuario">Introduzca su Usuario</string>
+    <string name="edpassword">Introduzca su Password</string>
+    <string name="txt_Nombre">Nombre</string>
+    <string name="txt_Contra">Contraseña</string>
+    <string name="txt_ConfContra">Confirmar Contraseña</string>
+    <string name="txt_TipoU">Tipo Usuario</string>
+    <string name="bt_Cancelar">Cancelar</string>
+    <string name="bt_Registrar">Registrar</string>
+    <string name="ed_Email">Ingrese un Email</string>
+    <string name="edEmail">Ingrese un Email</string>
+    <string name="ed_Nombre">Ingrese su Nombre</string>
+    <string name="ed_Password">Ingrese una Contraseña</string>
+    <string name="ed_ConfPass">Confirme la Contreseña</string>
+
+
 </resources>

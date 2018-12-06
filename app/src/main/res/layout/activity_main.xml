@@ -6,80 +6,68 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
-    tools:context=".MainActivity">
-
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="153dp"
-        android:layout_height="150dp"
-        android:layout_gravyty="center"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:src="@drawable/sosapplogo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".MainActivity"
+    tools:ignore="MissingDefaultResource">
 
 
     <EditText
         android:id="@+id/edusuario"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginLeft="42dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginLeft="55dp"
+        android:autofillHints=""
         android:background="#e0f7fa"
         android:ems="10"
-        android:hint="Introduzca su usuario"
+        android:hint="Introduzca el usuaro"
         android:inputType="text"
         android:lineSpacingExtra="10sp"
+        android:text="@string/edusuario"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/tvusuario" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvusuario"
         android:layout_width="87dp"
         android:layout_height="30dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="32dp"
         android:text="Usuario"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
 
     <EditText
-        android:id="@+id/edpassword"
+        android:id="@+id/edPass"
         android:layout_width="wrap_content"
         android:layout_height="36dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="8dp"
         android:background="#e0f7fa"
         android:ems="10"
-        android:hint="Introduzca su contraseña"
+        android:hint="Introduzca el password"
         android:inputType="textPassword"
         android:lineSpacingExtra="10sp"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
+        android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/tvcontraseña" />
 
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tvcontraseña"
         android:layout_width="133dp"
         android:layout_height="30dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginLeft="56dp"
+        android:layout_marginTop="11dp"
         android:text="Contraseña"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -89,12 +77,12 @@
 
     <TextView
 
-        android:id="@+id/textViewRegistrarse"
+        android:id="@+id/tvRegistrarse"
         android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
-        android:layout_marginTop="104dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginTop="8dp"
         android:lineSpacingExtra="8sp"
         android:text="Registrarse"
         android:textAllCaps="false"
@@ -102,22 +90,33 @@
         android:textSize="18sp"
         android:textStyle="bold|italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edpassword"
+        app:layout_constraintTop_toBottomOf="@+id/edPass"
         tools:ignore="MissingConstraints,MissingPrefix" />
 
     <Button
         android:id="@+id/btinicio"
-        android:layout_width="103dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="120dp"
-        android:layout_marginLeft="120dp"
-        android:layout_marginTop="106dp"
-        android:text="Iniciar"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:layout_width="151dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginLeft="72dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/animabotoinicio"
         android:visibility="visible"
-        app:layout_constraintStart_toEndOf="@+id/textViewRegistrarse"
-        app:layout_constraintTop_toBottomOf="@+id/edpassword" />
+        app:layout_constraintStart_toEndOf="@+id/tvRegistrarse"
+        app:layout_constraintTop_toBottomOf="@+id/edPass" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/applogo" />
 
 </android.support.constraint.ConstraintLayout>
