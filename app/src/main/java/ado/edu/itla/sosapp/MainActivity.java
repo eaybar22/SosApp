@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,11 +23,25 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "SOSAPP.MAINACTIVITY";
     UsuarioRepositorio usuarioRepositorio;
     Sesion sesion = null;
+=======
+import ado.edu.itla.sosapp.entidad.Usuario;
+import ado.edu.itla.sosapp.repositorio.DbConexion;
+import ado.edu.itla.sosapp.repositorio.usuario.UsuarioRepositorio;
+
+
+public abstract class MainActivity extends AppCompatActivity {
+
+        TextView tv_registrar;
+    private static final String TAG = "SOSAPP.MAINACTIVITY";
+
+
+>>>>>>> 9e5982be5e8582d1de3c6e89ffd266810b9df116
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
+<<<<<<< HEAD
         sesion = new Sesion(getApplicationContext());
         String correo = sesion.get("email");
         if(!correo.equals(""))
@@ -79,3 +94,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
 }
+=======
+        Log.d(TAG, "Entrando al Main Activity");
+        Log.e(TAG, "SosApp Ing.Aybar");
+
+        tv_registrar = findViewById(R.id.tvRegistrarse);
+        tv_registrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentReg = new Intent(MainActivity.this, Registro.class);
+                MainActivity.this.startActivity(intentReg);
+
+                    }
+
+
+                });
+
+    }
+}
+
+
+
+
+
+>>>>>>> 9e5982be5e8582d1de3c6e89ffd266810b9df116

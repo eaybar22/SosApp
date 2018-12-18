@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fRegistro"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:visibility="visible"
+    tools:context=".Registro">
+
+    <TextView
+        android:id="@+id/textViewEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/tvEmail"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/textViewNom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/txt_Nombre"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edEmail" />
+
+    <TextView
+        android:id="@+id/textViewContra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/txt_Contra"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edNombre" />
+
+    <TextView
+        android:id="@+id/textViewConfCont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="14dp"
+        android:text="@string/txt_ConfContra"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edPass" />
+
+    <Button
+        android:id="@+id/bCancelar"
+        android:layout_width="111dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="40dp"
+        android:background="#bdbdbd"
+        android:text="@string/bt_Cancelar"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edConfPass" />
+
+    <Button
+        android:id="@+id/bRegistrar"
+        android:layout_width="111dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="84dp"
+        android:layout_marginLeft="84dp"
+        android:layout_marginTop="40dp"
+        android:background="#00e676"
+        android:onClick="R_Usuario"
+        android:text="@string/bt_Registrar"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/bCancelar"
+        app:layout_constraintTop_toBottomOf="@+id/edConfPass" />
+
+    <EditText
+        android:id="@+id/edEmail"
+        android:layout_width="310dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:background="#e0f7fa"
+        android:ems="10"
+        android:hint="@string/edEmail"
+        android:inputType="textEmailAddress"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEmail"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/edNombre"
+        android:layout_width="310dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="7dp"
+        android:background="#e0f7fa"
+        android:ems="10"
+        android:hint="@string/ed_Nombre"
+        android:inputType="text"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNom" />
+
+    <EditText
+        android:id="@+id/edPass"
+        android:layout_width="310dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="1dp"
+        android:background="#e0f7fa"
+        android:ems="10"
+        android:hint="@string/ed_Password"
+        android:inputType="textWebPassword"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewContra" />
+
+    <EditText
+        android:id="@+id/edConfPass"
+        android:layout_width="310dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="1dp"
+        android:background="#e0f7fa"
+        android:ems="10"
+        android:hint="@string/ed_ConfPass"
+        android:inputType="textWebPassword"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewConfCont" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="132dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:contentDescription="TODO"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/applogo" />
+
+</android.support.constraint.ConstraintLayout>
