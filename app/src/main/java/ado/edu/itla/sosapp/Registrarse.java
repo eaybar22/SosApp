@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 import ado.edu.itla.sosapp.entidad.Usuario;
 import ado.edu.itla.sosapp.repositorio.usuario.UsuarioRepositorio;
-import ado.edu.itla.sosapp.repositorio.usuario.UsuarioRepositorioimpl;
+import ado.edu.itla.sosapp.repositorio.usuario.UsuarioRepositorioImpl;
 
 public class Registrarse extends AppCompatActivity {
 
@@ -31,7 +31,7 @@ public class Registrarse extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registro);
 
-        usuarioRepositorio = new UsuarioRepositorioimpl(this);
+        usuarioRepositorio = new UsuarioRepositorioImpl(this);
 
         final EditText emailText = findViewById(R.id.registrar_email);
         final EditText nombreText = findViewById(R.id.registrar_nombre);

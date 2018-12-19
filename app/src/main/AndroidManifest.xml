@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ado.edu.itla.sosapp">
 
-<<<<<<< HEAD
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -26,14 +26,15 @@
         <activity android:name=".NuevaSolicitud" android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Solicitudes"  android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".VerSolicitud"  android:theme="@style/AppTheme.NoActionBar"/>
+    <activity android:name=".MainActivity$MainActivity" />
 
-        <meta-data
+    <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
     </application>
-=======
-<application
+
+
     android:allowBackup="true"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
@@ -49,7 +50,6 @@
         </intent-filter>
     </activity>
     <activity android:name=".Registro"></activity>
-</application>
->>>>>>> 9e5982be5e8582d1de3c6e89ffd266810b9df116
+
 
 </manifest>

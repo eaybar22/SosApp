@@ -18,19 +18,20 @@ import ado.edu.itla.sosapp.InicioActivity;
 import ado.edu.itla.sosapp.entidad.AreaAfin;
 import ado.edu.itla.sosapp.entidad.Solicitud;
 import ado.edu.itla.sosapp.entidad.Usuario;
-import ado.edu.itla.sosapp.repositorio.Dbconexion;
+import ado.edu.itla.sosapp.repositorio.DbConexion;
 import ado.edu.itla.sosapp.repositorio.areas.AreaRepositorioimpl;
-import ado.edu.itla.sosapp.repositorio.usuario.UsuarioRepositorioimpl;
+import ado.edu.itla.sosapp.repositorio.usuario.UsuarioRepositorioImpl;
 
-public class SolicitudRepositorioimpl implements SolicitudRepositorio {
-    private Dbconexion dbConexion;
+public class SolicitudRepositorioimpl extends SolicitudRepositorio {
+    private DbConexion dbConexion;
     private Context conext;
-    public SolicitudRepositorioimpl(Context context)
-    {
 
-        dbConexion = new Dbconexion(context);
+    public SolicitudRepositorioimpl(Context context) {
+
+        dbConexion = new DbConexion(context);
         conext = context;
     }
+
     @Override
     public void guardar(Solicitud solicitud) {
         ContentValues cv = new ContentValues();
@@ -51,8 +52,8 @@ public class SolicitudRepositorioimpl implements SolicitudRepositorio {
         //TODO: guardar solicitud
         SQLiteDatabase db = dbConexion.getWritableDatabase();
         if (solicitud.isActualizando()) {
-           int count = db.update("solicitud", cv, "id=?", new String[]{String.valueOf(solicitud.getId())});
-           //conteo de los datos.
+            int count = db.update("solicitud", cv, "id=?", new String[]{String.valueOf(solicitud.getId())});
+            //conteo de los datos.
         } else {
             Long id = db.insert("solicitud", null, cv);
             solicitud.setId(id.intValue());
@@ -67,15 +68,14 @@ public class SolicitudRepositorioimpl implements SolicitudRepositorio {
     public List<Solicitud> buscarSolicitudesPor(Usuario usuario) {
         SQLiteDatabase db = dbConexion.getReadableDatabase();
         Cursor c = null;
-        String nombre ="";
+        String nombre = "";
         List<Solicitud> solicitudes = new ArrayList<>();
         Solicitud solicitud = null;
-        try
-        {
-            c = db.query("solicitud",null," usuario_solicitante_id=? ",
-                    new String[]{String.valueOf(usuario.getId())},null,null," id DESC ");
+        try {
+            c = db.query("solicitud", null, " usuario_solicitante_id=? ",
+                    new String[]{String.valueOf(usuario.getId())}, null, null, " id DESC ");
 
-            while(c.moveToNext()){
+            while (c.moveToNext()) {
                 solicitud = new Solicitud();
 
                 solicitud.setId(c.getInt(c.getColumnIndex("id")));
@@ -84,17 +84,21 @@ public class SolicitudRepositorioimpl implements SolicitudRepositorio {
                 int id = c.getInt(c.getColumnIndex("areaafin"));
                 AreaAfin afin = new AreaRepositorioimpl(conext).buscarPor(id);
                 solicitud.setAreaAfin(afin);
-                Usuario usu =  new UsuarioRepositorioimpl(conext).buscarPor(c.getInt(c.getColumnIndex("usuario_solicitante_id")));
+                Usuario usu = new UsuarioRepositorioImpl(conext).buscarPor(c.getInt(c.getColumnIndex("usuario_solicitante_id")));
                 solicitud.setUsuarioSolicitante(usu);
                 String estado = c.getString(c.getColumnIndex("estado"));
-                if(estado.equals(Solicitud.Estado.Pendiente.toString()))
-                {solicitud.setEstado(Solicitud.Estado.Pendiente);}else if(estado.equals(Solicitud.Estado.Proceso.toString()))
-                {solicitud.setEstado(Solicitud.Estado.Proceso);}else{solicitud.setEstado(Solicitud.Estado.Terminado);}
+                if (estado.equals(Solicitud.Estado.Pendiente.toString())) {
+                    solicitud.setEstado(Solicitud.Estado.Pendiente);
+                } else if (estado.equals(Solicitud.Estado.Proceso.toString())) {
+                    solicitud.setEstado(Solicitud.Estado.Proceso);
+                } else {
+                    solicitud.setEstado(Solicitud.Estado.Terminado);
+                }
                 long nfecha = c.getLong(c.getColumnIndex("fecha"));
                 Date fechad = new Date(nfecha);
-                Log.i("SOSAPPFECHA",fechad.toString());
+                Log.i("SOSAPPFECHA", fechad.toString());
                 solicitud.setFecha(fechad);
-                Usuario usua =  new UsuarioRepositorioimpl(conext).buscarPor(c.getInt(c.getColumnIndex("usuario_asignado_id")));
+                Usuario usua = new UsuarioRepositorioImpl(conext).buscarPor(c.getInt(c.getColumnIndex("usuario_asignado_id")));
                 solicitud.setUsuarioAsignado(usua);
 
 
@@ -103,29 +107,25 @@ public class SolicitudRepositorioimpl implements SolicitudRepositorio {
             }
             c.close();
 
-            c.close();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return solicitudes;
     }
 
     @Override
-    public List<Solicitud> buscarSolicitudesSeleccionadas(Usuario usuario, String estadoen)
-    {
+    public List<Solicitud> buscarSolicitudesSeleccionadas(Usuario usuario, String estadoen) {
 
         SQLiteDatabase db = dbConexion.getReadableDatabase();
         Cursor c = null;
-        String nombre ="";
+        String nombre = "";
         List<Solicitud> solicitudes = new ArrayList<>();
         Solicitud solicitud = null;
-        try
-        {
-            c = db.query("solicitud",null," usuario_asignado_id=? AND estado=?",
-                    new String[]{String.valueOf(usuario.getId()),estadoen},null,null," id DESC ");
+        try {
+            c = db.query("solicitud", null, " usuario_asignado_id=? AND estado=?",
+                    new String[]{String.valueOf(usuario.getId()), estadoen}, null, null, " id DESC ");
 
-            while(c.moveToNext()){
+            while (c.moveToNext()) {
                 solicitud = new Solicitud();
 
                 solicitud.setId(c.getInt(c.getColumnIndex("id")));
@@ -134,17 +134,21 @@ public class SolicitudRepositorioimpl implements SolicitudRepositorio {
                 int id = c.getInt(c.getColumnIndex("areaafin"));
                 AreaAfin afin = new AreaRepositorioimpl(conext).buscarPor(id);
                 solicitud.setAreaAfin(afin);
-                Usuario usu =  new UsuarioRepositorioimpl(conext).buscarPor(c.getInt(c.getColumnIndex("usuario_solicitante_id")));
+                Usuario usu = new UsuarioRepositorioImpl(conext).buscarPor(c.getInt(c.getColumnIndex("usuario_solicitante_id")));
                 solicitud.setUsuarioSolicitante(usu);
                 String estado = c.getString(c.getColumnIndex("estado"));
-                if(estado.equals(Solicitud.Estado.Pendiente.toString()))
-                {solicitud.setEstado(Solicitud.Estado.Pendiente);}else if(estado.equals(Solicitud.Estado.Proceso.toString()))
-                {solicitud.setEstado(Solicitud.Estado.Proceso);}else{solicitud.setEstado(Solicitud.Estado.Terminado);}
+                if (estado.equals(Solicitud.Estado.Pendiente.toString())) {
+                    solicitud.setEstado(Solicitud.Estado.Pendiente);
+                } else if (estado.equals(Solicitud.Estado.Proceso.toString())) {
+                    solicitud.setEstado(Solicitud.Estado.Proceso);
+                } else {
+                    solicitud.setEstado(Solicitud.Estado.Terminado);
+                }
                 long nfecha = c.getLong(c.getColumnIndex("fecha"));
                 Date fechad = new Date(nfecha);
-                Log.i("SOSAPPFECHA",fechad.toString());
+                Log.i("SOSAPPFECHA", fechad.toString());
                 solicitud.setFecha(fechad);
-                Usuario usua =  new UsuarioRepositorioimpl(conext).buscarPor(c.getInt(c.getColumnIndex("usuario_asignado_id")));
+                Usuario usua = new UsuarioRepositorioImpl(conext).buscarPor(c.getInt(c.getColumnIndex("usuario_asignado_id")));
                 solicitud.setUsuarioAsignado(usua);
 
 
@@ -154,8 +158,7 @@ public class SolicitudRepositorioimpl implements SolicitudRepositorio {
             c.close();
 
             c.close();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -166,16 +169,15 @@ public class SolicitudRepositorioimpl implements SolicitudRepositorio {
     public List<Solicitud> buscarTodos() {
         SQLiteDatabase db = dbConexion.getReadableDatabase();
         Cursor c = null;
-        String nombre ="";
+        String nombre = "";
         List<Solicitud> solicitudes = new ArrayList<>();
         Solicitud solicitud = null;
-        try
-        {
+        try {
 
-            c = db.query("solicitud",null,null,
-                    null,null,null," id DESC ");
+            c = db.query("solicitud", null, null,
+                    null, null, null, " id DESC ");
 
-            while(c.moveToNext()){
+            while (c.moveToNext()) {
 
                 solicitud = new Solicitud();
 
@@ -185,16 +187,20 @@ public class SolicitudRepositorioimpl implements SolicitudRepositorio {
                 int id = c.getInt(c.getColumnIndex("areaafin"));
                 AreaAfin afin = new AreaRepositorioimpl(conext).buscarPor(id);
                 solicitud.setAreaAfin(afin);
-                Usuario usu =  new UsuarioRepositorioimpl(conext).buscarPor(c.getInt(c.getColumnIndex("usuario_solicitante_id")));
+                Usuario usu = new UsuarioRepositorioImpl(conext).buscarPor(c.getInt(c.getColumnIndex("usuario_solicitante_id")));
                 solicitud.setUsuarioSolicitante(usu);
                 String estado = c.getString(c.getColumnIndex("estado"));
-                if(estado.equals(Solicitud.Estado.Pendiente.toString()))
-                {solicitud.setEstado(Solicitud.Estado.Pendiente);}else if(estado.equals(Solicitud.Estado.Proceso.toString()))
-                {solicitud.setEstado(Solicitud.Estado.Proceso);}else{solicitud.setEstado(Solicitud.Estado.Terminado);}
+                if (estado.equals(Solicitud.Estado.Pendiente.toString())) {
+                    solicitud.setEstado(Solicitud.Estado.Pendiente);
+                } else if (estado.equals(Solicitud.Estado.Proceso.toString())) {
+                    solicitud.setEstado(Solicitud.Estado.Proceso);
+                } else {
+                    solicitud.setEstado(Solicitud.Estado.Terminado);
+                }
                 long nfecha = c.getLong(c.getColumnIndex("fecha"));
                 Date fechad = new Date(nfecha);
                 solicitud.setFecha(fechad);
-                Usuario usua =  new UsuarioRepositorioimpl(conext).buscarPor(c.getInt(c.getColumnIndex("usuario_asignado_id")));
+                Usuario usua = new UsuarioRepositorioImpl(conext).buscarPor(c.getInt(c.getColumnIndex("usuario_asignado_id")));
                 solicitud.setUsuarioAsignado(usua);
 
 
@@ -202,14 +208,28 @@ public class SolicitudRepositorioimpl implements SolicitudRepositorio {
 
             }
             c.close();
-            c.close();
-        }
-        catch (Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return solicitudes;
     }
+
+    //Codigo para borrar
+    @Override
+    public Solicitud borrar(int id) {
+        return null;
+        SQLiteDatabase db = dbConexion.getWritableDatabase() {
+
+            db.delete("solicitud", "id=?", new String[]{String.valueOf(id)});
+
+            Log.e("TAG_BORRAR", "Borrando la solicitud");
+
+            db.close();
+        }
+    }
+
 
     @Override
     public Solicitud buscarPor(int id) {
@@ -232,7 +252,7 @@ public class SolicitudRepositorioimpl implements SolicitudRepositorio {
                 int ide = c.getInt(c.getColumnIndex("areaafin"));
                 AreaAfin afin = new AreaRepositorioimpl(conext).buscarPor(ide);
                 solicitud.setAreaAfin(afin);
-                Usuario usu =  new UsuarioRepositorioimpl(conext).buscarPor(c.getInt(c.getColumnIndex("usuario_solicitante_id")));
+                Usuario usu =  new UsuarioRepositorioImpl(conext).buscarPor(c.getInt(c.getColumnIndex("usuario_solicitante_id")));
                 solicitud.setUsuarioSolicitante(usu);
                 String estado = c.getString(c.getColumnIndex("estado"));
                 if(estado.equals(Solicitud.Estado.Pendiente.toString()))
@@ -241,7 +261,7 @@ public class SolicitudRepositorioimpl implements SolicitudRepositorio {
                 long nfecha = c.getLong(c.getColumnIndex("fecha"));
                 Date fechad = new Date(nfecha);
                 solicitud.setFecha(fechad);
-                Usuario usua =  new UsuarioRepositorioimpl(conext).buscarPor(c.getInt(c.getColumnIndex("usuario_asignado_id")));
+                Usuario usua =  new UsuarioRepositorioImpl(conext).buscarPor(c.getInt(c.getColumnIndex("usuario_asignado_id")));
                 solicitud.setUsuarioAsignado(usua);
 
             }

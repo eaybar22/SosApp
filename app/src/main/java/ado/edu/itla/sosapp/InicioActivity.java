@@ -31,7 +31,8 @@ import ado.edu.itla.sosapp.entidad.Solicitud;
 import ado.edu.itla.sosapp.entidad.Usuario;
 import ado.edu.itla.sosapp.repositorio.funciones.Sesion;
 import ado.edu.itla.sosapp.repositorio.solicitud.SolicitudRepositorioimpl;
-import ado.edu.itla.sosapp.repositorio.usuario.UsuarioRepositorioimpl;
+import ado.edu.itla.sosapp.repositorio.usuario.UsuarioRepositorioImpl;
+
 
 public class InicioActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -110,7 +111,7 @@ public class InicioActivity extends AppCompatActivity implements NavigationView.
             list = findViewById(R.id.missolicitudes_list);
             Sesion sesion = new Sesion(getApplicationContext());
             String correo = sesion.get("email");
-            Usuario usuario = new UsuarioRepositorioimpl(getApplicationContext()).buscar(correo);
+            Usuario usuario = new UsuarioRepositorioImpl(getApplicationContext()).buscar(correo);
             final List<Solicitud> solicituds = new SolicitudRepositorioimpl(getApplicationContext()).buscarSolicitudesPor(usuario);
             SolicitudAdapter adapter = new SolicitudAdapter(getApplicationContext(),solicituds);
             list.setAdapter(adapter);
@@ -121,7 +122,7 @@ public class InicioActivity extends AppCompatActivity implements NavigationView.
             list = findViewById(R.id.missolicitudes_list);
             Sesion sesion = new Sesion(getApplicationContext());
             String correo = sesion.get("email");
-            Usuario usuario = new UsuarioRepositorioimpl(getApplicationContext()).buscar(correo);
+            Usuario usuario = new UsuarioRepositorioImpl(getApplicationContext()).buscar(correo);
             final List<Solicitud> solicituds = new SolicitudRepositorioimpl(getApplicationContext()).buscarSolicitudesSeleccionadas(usuario,"Proceso");
             SolicitudAdapter adapter = new SolicitudAdapter(getApplicationContext(),solicituds);
             list.setAdapter(adapter);

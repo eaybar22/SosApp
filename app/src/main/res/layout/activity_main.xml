@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
+
     tools:context=".MainActivity">
 
     <TextView
@@ -122,7 +122,7 @@
         android:layout_marginStart="72dp"
         android:layout_marginLeft="72dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/animabotoinicio"
+        android:background="@drawable/animabotoninicio"
         android:visibility="visible"
         app:layout_constraintStart_toEndOf="@+id/tvRegistrarse"
         app:layout_constraintTop_toBottomOf="@+id/edPass" />

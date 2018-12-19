@@ -8,14 +8,15 @@ import java.util.ArrayList;
 
 import ado.edu.itla.sosapp.entidad.AreaAfin;
 import ado.edu.itla.sosapp.entidad.Usuario;
-import ado.edu.itla.sosapp.repositorio.Dbconexion;
+import ado.edu.itla.sosapp.repositorio.DbConexion;
+
 
 public class AreaRepositorioimpl implements AreaRepositorio {
 
-    private Dbconexion dbConexion;
+   private DbConexion dbConexion;
 
     public AreaRepositorioimpl(Context context) {
-        this.dbConexion = new Dbconexion(context);
+        this.dbConexion = new DbConexion(context);
     }
     @Override
     public ArrayList<AreaAfin> buscarTodos() {

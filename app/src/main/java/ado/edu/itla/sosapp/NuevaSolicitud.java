@@ -24,7 +24,7 @@ import ado.edu.itla.sosapp.repositorio.areas.AreaRepositorioimpl;
 import ado.edu.itla.sosapp.repositorio.funciones.Sesion;
 import ado.edu.itla.sosapp.repositorio.solicitud.SolicitudRepositorio;
 import ado.edu.itla.sosapp.repositorio.solicitud.SolicitudRepositorioimpl;
-import ado.edu.itla.sosapp.repositorio.usuario.UsuarioRepositorioimpl;
+import ado.edu.itla.sosapp.repositorio.usuario.UsuarioRepositorioImpl;
 
 public class NuevaSolicitud extends AppCompatActivity  {
 
@@ -78,7 +78,7 @@ public class NuevaSolicitud extends AppCompatActivity  {
         AreaAfin afin = (AreaAfin) area.getSelectedItem();
         solicitud.setAreaAfin(afin);
         solicitud.setFecha(new Date());
-        Usuario usuario =  new UsuarioRepositorioimpl(getApplicationContext()).buscar(""+email);
+        Usuario usuario =  new UsuarioRepositorioImpl(getApplicationContext()).buscar(""+email);
         solicitud.setUsuarioSolicitante(usuario);
         solicitud.setTitulo(titulo.getText().toString());
 

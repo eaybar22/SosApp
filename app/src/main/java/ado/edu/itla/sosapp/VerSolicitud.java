@@ -18,24 +18,24 @@ import java.util.Date;
 import ado.edu.itla.sosapp.entidad.AreaAfin;
 import ado.edu.itla.sosapp.entidad.Solicitud;
 import ado.edu.itla.sosapp.entidad.Usuario;
-import ado.edu.itla.sosapp.repositorio.Dbconexion;
+import ado.edu.itla.sosapp.repositorio.DbConexion;
 import ado.edu.itla.sosapp.repositorio.funciones.Sesion;
 import ado.edu.itla.sosapp.repositorio.solicitud.SolicitudRepositorio;
 import ado.edu.itla.sosapp.repositorio.solicitud.SolicitudRepositorioimpl;
-import ado.edu.itla.sosapp.repositorio.usuario.UsuarioRepositorioimpl;
+import ado.edu.itla.sosapp.repositorio.usuario.UsuarioRepositorioImpl;
 
 public class VerSolicitud extends AppCompatActivity {
     Sesion sesion = null;
     Solicitud solicitud=null;
     SolicitudRepositorio solicitudRepositorio;
     String correo="";
-    private Dbconexion dbConexion;
+    private DbConexion dbConexion;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ver_solicitud);
         String idSolicitud="";
-        dbConexion = new Dbconexion(getApplicationContext());
+        dbConexion = new DbConexion(getApplicationContext());
         if (savedInstanceState == null) {
         Bundle extras = getIntent().getExtras();
         if(extras == null) {
@@ -67,7 +67,7 @@ public class VerSolicitud extends AppCompatActivity {
         TextView fecha = findViewById(R.id.solicitud_lsfecha);
         fecha.setText(solicitud.getFecha().toString());
 
-        Usuario current_user = new UsuarioRepositorioimpl(getApplicationContext()).buscar(correo);
+        Usuario current_user = new UsuarioRepositorioImpl(getApplicationContext()).buscar(correo);
 
         TextView ttc = findViewById(R.id.labelcreatra);
         TextView qtra = findViewById(R.id.solicitud_lsusuario);
@@ -134,7 +134,7 @@ public class VerSolicitud extends AppCompatActivity {
                             if (bcancelar.getText().toString().equals("Seleccionar")) {
                                 Solicitud solicitudm = new Solicitud();
                                 solicitudm.setEstado(Solicitud.Estado.Proceso);
-                                Usuario usuasignado = new UsuarioRepositorioimpl(getApplicationContext()).buscar("" + correo);
+                                Usuario usuasignado = new UsuarioRepositorioImpl(getApplicationContext()).buscar("" + correo);
                                 solicitudm.setUsuarioAsignado(usuasignado);
                                 solicitudm.setActualizando(true);
                                 solicitudm.setId(solicitud.getId());
@@ -150,7 +150,7 @@ public class VerSolicitud extends AppCompatActivity {
 
                                 Solicitud solicitudm = new Solicitud();
                                 solicitudm.setEstado(Solicitud.Estado.Terminado);
-                                Usuario usuasignado = new UsuarioRepositorioimpl(getApplicationContext()).buscar("" + correo);
+                                Usuario usuasignado = new UsuarioRepositorioImpl(getApplicationContext()).buscar("" + correo);
                                 solicitudm.setUsuarioAsignado(usuasignado);
                                 solicitudm.setActualizando(true);
                                 solicitudm.setId(solicitud.getId());
@@ -175,7 +175,7 @@ public class VerSolicitud extends AppCompatActivity {
                 {
                     Solicitud solicitudm = new Solicitud();
                     solicitudm.setEstado(Solicitud.Estado.Pendiente);
-                    Usuario usuasignado =  new UsuarioRepositorioimpl(getApplicationContext()).buscar(""+correo);
+                    Usuario usuasignado =  new UsuarioRepositorioImpl(getApplicationContext()).buscar(""+correo);
                     solicitudm.setUsuarioAsignado(usuasignado);
                     solicitudm.setActualizando(true);
                     solicitudm.setId(solicitud.getId());
@@ -196,42 +196,31 @@ public class VerSolicitud extends AppCompatActivity {
 
     private AlertDialog pregunta(final int id)
     {
-        AlertDialog mDialogBox =new AlertDialog.Builder(this)
-                .setTitle("Borrar Solicitud")
-                .setMessage("Seguro que quieres borrar tu solicitud?")
-                .setIcon(R.drawable.ic_menu_slideshow)
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Borrar Solicitud");
+        builder.setMessage("Seguro que quieres borrar tu solicitud?");
+        builder.setIcon(R.drawable.ic_menu_slideshow);
+        AlertDialog.Builder setPositiveButton = builder.setPositiveButton("Borrar", new DialogInterface.OnClickListener() {
 
-                .setPositiveButton("Borrar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
 
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Codigo para borrar
-                        SQLiteDatabase db = dbConexion.getWritableDatabase();
+                //solicitud.
+                dialog.dismiss();
+                Intent i = new Intent(VerSolicitud.this, InicioActivity.class);
+                startActivity(i);
+                Toast.makeText(getApplicationContext(),
+                        "Solicitud borrada", Toast.LENGTH_SHORT).show();
+            }
 
-                        db.delete("solicitud","id=?",new String[]{String.valueOf(id)});
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
 
-                        Log.e("TAG_BORRAR","Borrando la solicitud");
+                dialog.dismiss();
 
-                        db.close();
-                        //solicitud.
-                        dialog.dismiss();
-                        Intent i = new Intent(VerSolicitud.this, InicioActivity.class);
-                        startActivity(i);
-                        Toast.makeText(getApplicationContext(),
-                              "Solicitud borrada",Toast.LENGTH_SHORT).show();
-                    }
-
-                })
-
-
-
-                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        dialog.dismiss();
-
-                    }
-                })
-                .create();
+            }
+        });
+        AlertDialog mDialogBox = builder.create();
         return mDialogBox;
 
     }

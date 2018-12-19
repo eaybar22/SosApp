@@ -10,5 +10,8 @@ public interface SolicitudRepositorio  {
     public List<Solicitud> buscarSolicitudesPor(Usuario usuario);
     public List<Solicitud> buscarSolicitudesSeleccionadas (Usuario usuario, String estadoen);
     public List<Solicitud> buscarTodos();
+
+    Solicitud borrar(int id);
+
     public Solicitud buscarPor(int id);
 }

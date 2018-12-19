@@ -57,4 +57,14 @@ public class UsuarioRepositorioImpl implements UsuarioRepositorio {
         }
         return usuario;
     }
+
+    @Override
+    public String logging(String email, String password) {
+        return null;
+    }
+
+    @Override
+    public Usuario buscarPor(int id) {
+        return null;
+    }
 }
