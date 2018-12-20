@@ -65,7 +65,7 @@ public class NuevaSolicitud extends AppCompatActivity  {
         if(descripcion.getText().length() < 7)
         {
             Toast.makeText(getApplicationContext(),"Descripción no admitida!",Toast.LENGTH_SHORT);
-            titulo.setError("El campo descripción está vacío ó su longitud es menor a 4");
+            titulo.setError("El campo descripción está vacío ó su longitud es menor a 7");
             return;
         }
         /*OBTENER LOS DATOS DE SESION/PROBAR*/

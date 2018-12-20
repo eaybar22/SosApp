@@ -21,8 +21,9 @@ import ado.edu.itla.sosapp.entidad.Usuario;
 import ado.edu.itla.sosapp.repositorio.DbConexion;
 import ado.edu.itla.sosapp.repositorio.areas.AreaRepositorioimpl;
 import ado.edu.itla.sosapp.repositorio.usuario.UsuarioRepositorioImpl;
+import ado.edu.itla.sosapp.repositorio.solicitud.SolicitudRepositorio;
 
-public class SolicitudRepositorioimpl extends SolicitudRepositorio {
+public class SolicitudRepositorioimpl implements SolicitudRepositorio {
     private DbConexion dbConexion;
     private Context conext;
 
@@ -220,15 +221,20 @@ public class SolicitudRepositorioimpl extends SolicitudRepositorio {
     @Override
     public Solicitud borrar(int id) {
         return null;
-        SQLiteDatabase db = dbConexion.getWritableDatabase() {
+        /*SQLiteDatabase db = dbConexion.getWritableDatabase() {
 
             db.delete("solicitud", "id=?", new String[]{String.valueOf(id)});
 
             Log.e("TAG_BORRAR", "Borrando la solicitud");
 
             db.close();
-        }
+        }*/
     }
+
+
+
+
+
 
 
     @Override
